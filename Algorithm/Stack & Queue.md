@@ -168,3 +168,35 @@ Left.remove()							 Right.remove()
      amortized time: O(1)
 ```
 
+
+
+### Question 5 how to sort numbers with three stacks by simulating MergeSort
+
+**Step 1:** Find middle point, cut into two halves.
+
+Array: mid = (left + right) / 2
+
+Linkedlist: mid = use fast, slow pointer
+
+Stack: read size(), and move 1/2 elements from one stack to the other.
+
+
+
+**Step 2:**  Call recursive function
+
+- left = mergeSort(Left part)
+- right = mergeSort(right part)
+
+3 stacks 
+
+L: MergeSort(s1, s2, s3, size/2);
+
+R: MergeSort(s2, s1, s3, size/2);
+
+
+
+Sort(s1, s2, s3, size) { // s1: input, s2:buffer, s3: buffer
+
+}
+
+**Step3:** Merge 谁小移谁
