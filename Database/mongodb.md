@@ -1,3 +1,15 @@
+Ctrl + z 挂起运行的程序
+
+jobs查询后台运行的程序
+
+bg %id 让某任务在后台运行
+
+fg 将后台中的命令调至前台继续运行
+
+
+
+
+
 Installing MongoDB for Windows and OS X
 
 - Why Mongo?
@@ -110,6 +122,8 @@ Mongo does have features to support database'scomplexity, while maintain the sca
 - `show collections`
 
 - use `createIndex` to reduce execution time
+
+- `.pretty()` : an easy-to-read *format*
 
   ```javascript
   for (i = 0; i < 10000; i++) {
