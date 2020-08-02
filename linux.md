@@ -237,3 +237,142 @@ defines common locations on the filesystem
 - Next: permissions
 - Right: ownner and group owner
 - Size of file in bytes (如果看想看到具体的单位，使用`ls -lh`)
+
+
+
+### Common command-line tasks and tools
+
+Modularity and flexibility
+
+**Pipe:** take the output of one command and sent it to another
+
+- |
+- e.g. `cat xxx.txt | tail -n5 | cat -n`
+
+Tools for text
+
+- `cat`: concatenate, to link together
+  - Can be used to output text file contents to the screen or to another tool
+  - `cat -n`: show file with line number
+  - `cat -n xxx.txt | tail -n5`
+- `head -n5 xxx.txt`: show top 5 lines in xxx.txt file
+- `tail -n3 xxx.txt`: show last 3 lines in xxx.txt file
+- `less`: paginates text and provides navigation controls
+  - Navigate forward aor backward use "f" and "b" keys
+  - 'space': jump to the end of the file
+  - up and down
+  - h: help
+  - q: quit
+
+
+
+### Searching for Text
+
+- Thre `grep` tool searches text or files for a given string or pattern of text.
+  - `grep -n "the" poems.txt`
+  - `grep -i "the" poems.txt `
+  - `grep -vi "the" poems.txt`: -v usually use for log to ignore noisy part
+  - `grep -E "\w{6,}" poems.txt`: use regular expression, highlight all the words with 6 or more characters
+
+
+
+### Manipulating text
+
+The `awk` and `sed` commands can both be used to programmatically manipulate text in streams or files
+
+`sed "s/oldword/newword" xxx.txt`: substitude oldword with newword in xxx.txt
+
+The `sort` command can be used to reorder lines of text according to different criteria
+
+
+
+### Editing Text
+
+- The vim software is a powerful and flexible command-line text editor
+- `shift + i`: move to the beginning of the line
+- `shift + g`: move to the bottom of the file
+- `1 + shift + g`: move to the top of the file
+- `o`: move to the new line after the current line
+- `q!` quit without saving
+
+
+
+### Tape Archives
+
+put many files together into one file
+
+.tar files are a common way to package and dsitribute software and data
+
+data compression is optional
+
+compressed formats: `.tar. gz`, `.tgz`, `.tar.bz2`
+
+
+
+data compression
+
+The zip and unzip commands can create and open compressed data archive files
+
+
+
+### output redirection
+
+`>`: override the file 
+
+`>>`: append to the end of the file
+
+e.g. `ls > filelist.txt`
+
+
+
+### Environment variables and Path
+
+On a Linux system, the `PATH` environment variable represents: locations which the shell will search for executable programs
+
+Without being able to search in the PATH, we would have to type out the full path to common tools every time we used them.
+
+### Extract information from a text file
+
+`cat auth.log | grep "input_userauth_request" | awk '{print $9}' | sort -u > users.txt`
+
+提取日志中没有成功登陆的用户名
+
+ 
+
+### Find system and hardware information
+
+- Find distrib information
+
+  `ls -lah /etc/*release`
+
+  `cat /etc/*release`
+
+- Find kernel information
+
+  `uname -a` 
+
+- Find how much RAM
+
+  `free -h`
+
+   -h option shows the numbers in a human-friendly format.
+
+- Find cpu information
+
+  `cat /proc/cpuinfo`  or `lscpu`
+
+- Find system hard drive information
+
+  `df -h`
+
+- `sudo lshw | less`
+- `ip `
+
+
+
+
+
+![image-20200727155311254](../../Library/Application Support/typora-user-images/image-20200727155311254.png)
+
+
+
