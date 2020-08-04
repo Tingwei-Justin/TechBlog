@@ -80,3 +80,145 @@ Avg: n + n/2 + n/4 +... + 1 = O(n)
 
 Worst case: O(n^2)
 
+
+
+
+
+
+
+Java PriorityQueue
+
+- implement Queue interface
+
+如何实现prority heap
+
+- Method 1: Comparable
+
+```
+PriorityQueue<Integer> minHeap = new PriorityQueue<>();
+```
+
+```
+interface Comparable<E> {
+	int compareTo(E ele);
+}
+```
+
+```java
+class Integer implements Comparable<Integer> {
+	@Override
+	public int CompareTo(Integer another) {
+		if (this.value == another.value) {
+			return 0;
+		}
+		return this.value < another.value ? -1 : 1;
+	}
+}
+```
+
+
+
+Method 2: Comparator
+
+provide an extra comparator object to compare the elements
+
+
+
+```java
+interface Comparator <E> {
+	int compare(E o1, E o2);
+}
+
+
+class MyComparator implements Comparator<Integer> {
+	@Override
+	public int compare(Integer i1, Integer i2) {
+		if (i1.equal(i2)) {
+			return 0;
+		}
+		return i1 < i2 ? 1 : -1;
+	}
+}
+```
+
+```
+// 如果想实现object.compareTo的相反顺序
+Collections.reverseOrder()
+```
+
+
+
+
+
+数组 vs treenode 来实现一个tree
+
+high level idea is a tree structure, but in detail we use array to implement a tree
+
+
+
+1. 输入输出都是array, 中间不需要其他数据结构的转换
+2. overhead小，random access, locality
+
+
+
+
+
+Implement a priority queue
+
+Offer(): percolate up 
+
+- Time: O(log n )  because complete tree, the height of complete tree is log n
+
+poll(): percolate down
+
+```java 
+public class Heap {
+	
+  public int poll() {
+    
+  }
+  
+  public void offer() {
+    
+  }
+  
+  public void heapify() {
+    for (int i = size / 2 - 1; i >= 0; i--) {
+      percolateDown(i);
+    }
+  }
+  
+	private void percolateUp(int index) {
+		while (index > 0) {
+      int parentIndex = (index - 1) / 2;
+      if (array[index] < array[parentIndex]) {
+        swap(array, index, parentIndex);
+        index = parentIndex;
+      } else {
+        break;
+      }
+    }
+	}
+	
+	private void percolateDown(int index) {
+		while (index <= size / 2 - 1) {
+      // 一定有left 但是不一定有right
+      int leftChildIndex = index * 2 + 1;
+      int rightChildIndex = index * 2 + 2;
+      int swapCandidate = leftChildIndex;
+      if (rightChildIndex; <= size - 1 && array[rightChildIndex] < array[leftChildIndex]) {
+        swapCandidate = rightChildIndex;
+      }
+			if (array[index] > array[swapCandidate]) {
+        swap(arary, index, swapCandidate);
+        index = swapCandidate;
+      } else {
+        break;
+      }
+    }
+	}
+}
+```
+
+
+
