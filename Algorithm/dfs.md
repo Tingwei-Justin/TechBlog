@@ -27,9 +27,9 @@ Back-tracking describes the behavior of DFS
 
 ### 1. subset
 
+凡是每个字符有两种可能性，加或者不加，要往subset 考虑
+
 print all subsets of a set
-
-
 
 **How many levels?**
 
@@ -49,7 +49,7 @@ Two branch, one for add this letter, one for not add
 {a, b, c}  {a, b} {a, c} {a}    {b, c} {b}     {c} {}
 ```
 
-
+append的数量和remove的数量 必须exactly same， 不一致一定错❌
 
 ⚠️ 写代码的时候 吃 和 🤮一定配对！！！吃了不吐撑死你
 
@@ -69,6 +69,14 @@ homework：
 
 1. Input = "abcde" add a space between two char, find all possible result
 2. 
+
+
+
+变种1: what if input = a b1 b2 b3 c
+
+solution 1: each level consider 1 type of letters
+
+solution 2: each level consider 1 letter
 
 
 
