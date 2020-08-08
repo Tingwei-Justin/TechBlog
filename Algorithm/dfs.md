@@ -65,10 +65,17 @@ void findSubset(char[] input, int level, StringBuilder sb) {
 }
 ```
 
-homework：
+
+
+Practice：
 
 1. Input = "abcde" add a space between two char, find all possible result
-2. 
+
+   each time we add 'x' or 'x_', and finally do a postprocessing to remove the last space if exists
+
+2. given a int array `[3, 4, 1, 2, -3, 5, 3, 2]`, split the array into k subarray, and each subarray have the same sum.
+
+3. given a int array `[3, 4, 1, 2, -3, 5, 3, 2]`, choose k subarray, and each subarray have the same sum (don't need to include all the elements).
 
 
 
@@ -114,6 +121,18 @@ public void findAllParenthesis(int n, int l, int r, StringBuilder sb) {
   }
 }
 ```
+
+左右括号问题配对的问题考虑使用stack, 凡是能匹配上的括号从stack 中消掉 （if match, we remove it from the stack)
+
+Finally, it must be like this structure  )))))) ((((((
+
+- Given a group of parenthesis `{}))(()`, how many parenthesis we at least to **add** to make it to a valid match?
+
+  **Solution:** maitain a stack, if match with top() then remove it, finally the size of the stack is our final result
+
+- Given a group of parenthesis `{}))(()`, how many parenthesis we at least to **reverse** to make it to a valid match?
+
+  **Solution:** maitain a stack, if match with top() then remove it, the final result is Ceiling(left/2) + Celling(right/2)
 
 
 
