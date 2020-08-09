@@ -139,3 +139,75 @@ public String findMinWindowSubstring(String source, String target) {
 }
 ```
 
+### Longest Substring With K Typed Characters
+
+Given a string, return the **longest contiguous substring** that contains **exactly** k type of characters.
+
+Return null if there does not exist such substring.
+
+Conner case: 
+
+- no valid result返回什么， k == 0返回什么
+- 注意初始化globalleft 和 globalright的default value
+
+sliding window semantic
+
+when to update right
+
+when to update left
+
+when to update the result
+
+```java
+public class Solution {
+  // time: O(n)
+  // space: O(k)
+  public int lengthOfLongestSubstringKDistinct(String input, int k) {
+    if (k == 0) {
+      return 0;
+    }
+    int globalResult = 0;
+    int left = 0;
+    HashMap<Character, Integer> map = new HashMap<>();
+
+    for (int right = 0; right < input.length(); right++) {
+      // step 1: add current right to hashmap
+      int rightCount = map.getOrDefault(input.charAt(right), 0);
+      map.put(input.charAt(right), rightCount + 1);
+
+      // step2: update left until map.size() <= k
+      while (map.size() > k) {
+        int leftCount = map.get(input.charAt(left));
+        leftCount--;
+        if (leftCount == 0) {
+          map.remove(input.charAt(left));
+        } else {
+          map.put(input.charAt(left), leftCount);
+        }
+        left++;
+      }
+      
+      // step3: update globalresult
+      globalResult = Math.max(globalResult, right - left + 1);
+    }
+    return globalResult;
+  }
+}
+```
+
+
+
+### 382. Shortest Substring With K Typed Characters
+
+Conner case: 
+
+- no valid result返回什么， k == 0返回什么
+- 注意初始化globalleft 和 globalright的default value
+
+sliding window semantic
+
+when to update right
+
+when to update left
+
+when to update the result
