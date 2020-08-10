@@ -118,3 +118,57 @@ Default logging is configured in the http context and can be overridden in the s
 
 5. tail the logs `tail -f /var/logs/nginx/*.log`
 6. 
+
+
+
+
+
+### Nginx security
+
+1. Keep your operatiing system and software patched and up-to-date
+2. Restrict access where possible
+3. use passwords to protect sensiteve information
+4. use ssl to protect transmissions and identify your site.
+
+
+
+configure allow and deny directives:
+
+```
+example:
+
+location /appointments/ {
+	allow 192.168.0.0/24;
+	allow 10.0.0.0/8;
+	deny all;
+}
+```
+
+
+
+create a custom default 403, 404 page
+
+
+
+
+
+### Reverse Proxies and Load Balancers
+
+They are very similar to use, If there is only one server in an upstream, NGINX will operate as a reverse proxy. If more than one server is in an upstream, NGINX will operate as a load balancer.
+
+Load Balancing directives:
+
+- Round Robin: -
+- Least Connections: least_conn
+- IP Hash: ip_hash
+- All: weight
+
+NGINX is great at simplifying things that might be harder to implement in other technologies like SSL termination and logging. NGINX proxies are also good for accelerating the response from backend servers by caching content.
+
+
+
+Upstreams are defined in the HTTP context. This is useful so that one upstream can be defined and then reused by multiple servers also defined in the HTTP context.
+
+
+
+The weight directive is used to influence load balancing methods. Since each server is considered evenly in the round robin method and by connections in the least connections method, a weight can be applied to a server to give it a higher preference.
