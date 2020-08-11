@@ -437,3 +437,38 @@ Delete in BST
 4 Cases
 
 Time: O(h), Space: O(h)
+
+
+
+
+
+
+
+
+
+merge two tree
+
+```java
+public TreeNode mergeTree(TreeNode t1, TreeNode t2) {
+	TreeNode newNode = null;
+	if (t1 == null && t2 == null) {
+		return newNode;
+	}
+  
+	if (t1 == null) {
+		newNode = new TreeNode(t2.key);
+	} else if (t2 == null) {
+		newNode = new TreeNode(t1.key);
+	} else {
+		newNode = new TreeNode(t1.key + t2.key);
+	}
+	newNode.left = mergeTree(t1.left == null ? null : t1.left, t2.left == null ? null : t2.left);
+	newNode.right = mergeTree(t1.right == null ? null : t1.right, t2.right == null ? null : t2.right);
+	return newNode;
+}
+```
+
+
+
+
+
