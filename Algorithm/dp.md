@@ -1,10 +1,149 @@
-一维dp
+Dp 的核心思想类似于我们高中的数学归纳法
+
+1. 把一个大问题的解决办法用比他小的问题来解决，也就是思考从问题size = n - 1 增加到 size = n的时候
+2. DP和recursion的关系
+   1. recursion从大到小来解决问题，不记录任何sub-solution
+      - base case
+      - recursive rule
+   2. dp 从小到大来解决问题，记录sub-solution
+      - size 的subsolutions -> size n 的solution
+      - base case
+      - induction rule
 
 
 
-二维dp
+### 1D dp
+
+let me run a example
+
+Ok, let's me explain the solution
 
 
+
+
+
+一维的original data (such as a rope, a word), 求Max or Min (cut, merge)
+
+Linear scan and look back to the previous elements
+
+- Longest Ascending subarray
+
+  M[i] represents the length of the longest ascending subarray  inlcuding the i-th index
+
+  index =  0  1  2  3  4  5  6 
+
+  array  =  7  2  3  1   5  8  9
+
+  dp	  =  1  1  2  1   2   3  4
+
+
+
+​		Base case: dp[0] = 1
+
+​		Induction rule: dp[i] = dp[i - 1] + 1		iff input[i] > input[i - 1]
+
+​														1				 else
+
+
+
+
+
+- longest ascending subsequence (dp 4)
+
+  
+
+- Cut rope
+  - Maximal Product when cutting rope
+
+    ```java
+    ___|___| ___| ___
+    
+    public int getMaxProduct(int n) {
+    	if (n <= 1) {
+    		return 0;
+    	}
+    }
+    
+    use dfs, time is O(2^n)
+    
+    
+    
+    dp solution 左大段 （可以查表格），右小段(再也不懂动的情况)
+    
+    1. base case: 
+    dp[0] = invalid
+    dp[1] = invalid
+    
+    
+    2. induction rule
+    
+    dp[i] = max(k, dp[k]) * (i - k)   [k from 0 to i - 1]
+    
+    dp[2] = 1 (only one possible way to cut)
+    
+    
+    
+    public int cutRope(int n) {
+    	int[] M = new int[n + 1]; // think about why n + 1??????
+    	M[0] = 1;
+    	M[1] = 0;
+    	for (int i = 2; i <= n; i++) {
+    		int curMax = 0;
+    		for (int j = 1; j < i; j++) {
+    			curMax = Math.max(curMax, Math.max(j, M[j]) * (i - j));
+          																大段 = j 				小段 = i - j
+    		}
+    		M[i] = curMax;
+    	}
+    	return M[n];
+    }
+    
+    ```
+
+- cut dictionary (跟切绳子完全是一道题)
+
+  Given a word, can it be composed by contatenating words from a given dictionary? 
+
+  Dictionary: bob cat rob
+
+  
+
+- Cut palindrome
+
+- jump game (1, 2, 3, 4变种)
+
+  - 3 2 1 0 3
+
+  ```java
+  dp solution: O(n^2)
+  
+  
+    
+   
+    
+    
+    
+  Greedy solution: O(n)
+  
+  we can maintain a can_reach position, we care about how far we can reach and update it
+  
+  public boolean canJump(int[] numbers) {
+    int canReach = 0;
+    for (int i = 0; i <= canReach; ++i) {
+      canReach = Math.max(canReach, i + array[i]);
+      if (canReach >= array.length - 1) {
+        return true;
+      }
+    }
+    return false;
+  }
+  
+  
+  ```
+
+  
+
+### 2D dp
 
 ### 中心开花
 
@@ -29,6 +168,10 @@ dp[i][j] = Min(dp[i][k] + dp[k][j] + array[j] - array[i])   i < k < j
 ```
 
 
+
+
+
+99 cent 求多少种凑法
 
 
 
