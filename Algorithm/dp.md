@@ -26,9 +26,9 @@ Ok, let's me explain the solution
 
 Linear scan and look back to the previous elements
 
-- Longest Ascending subarray
+- Longest Ascending subarray (linear scan and look back i -1 element)
 
-  M[i] represents the length of the longest ascending subarray  inlcuding the i-th index
+  M[i] represents the length of the longest ascending subarray inlcuding the i-th index
 
   index =  0  1  2  3  4  5  6 
 
@@ -46,9 +46,61 @@ Linear scan and look back to the previous elements
 
 
 
+- longest ascending subsequence (linear scan and look back 0 ... i - 1)
 
+  
 
-- longest ascending subsequence (dp 4)
+  solution 1:
+
+  dp[i] represents the longest subsequence from 0 to j including jth
+
+  
+
+  dp[i] = Max(dp[j] + 1)				if dp[j] < dp[i],   0 <= j < i
+
+  otherwise, dp[i] = 1
+
+  
+
+  solution 2: 
+
+  ```
+  a = {7 , 2 ,3 ,1, 5, 8, 9, 6}
+  
+  bestAcdSequence[i]: represents the smallest the ending value of all ascending sebsequence with length i.
+  idx   1	2	3	4	5	....
+  best: 1 3 5 6 9 
+  
+  
+  find the largest smaller index
+  case 1: index == length => length++, best[length] = array[i];
+  case 2: best[index + 1] = array[i];
+  
+  
+  return best[length]
+  
+  
+  b[0] = 0;
+  t1: a[i] = 7, b[1] = 7; length = 1;
+  t2: a[i] = 2, b[1] = 2; length = 1;
+  t3: a[i] = 3, b[2] = 3; length = 2;
+  ...
+  
+  
+  time: O(n * log n)
+  space: O(n)
+  
+  
+  if we want to print the any longest subsequece
+  we can use the array pred[i] to represent the index of predecessor of a[i]
+  
+  ```
+
+  Follow up 1: print any longest ascending subsequence
+
+  Follow up 2: print all  longest ascending subsequence
+
+  
 
   
 
@@ -78,13 +130,21 @@ Linear scan and look back to the previous elements
     2. induction rule
     
     dp[i] = max(k, dp[k]) * (i - k)   [k from 0 to i - 1]
-    
+      
     dp[2] = 1 (only one possible way to cut)
     
+    Left part: 
+    - two cases:
+    	case 1 : cut at least one time (check table dp[j])
+      case 2: no cut (just j)
     
+    Right part: i - j
     
+    dp[i] = Math.max(dp[i], left part * right part)    for each possible left part and right part
+      
+      
     public int cutRope(int n) {
-    	int[] M = new int[n + 1]; // think about why n + 1??????
+    	int[] M = new int[n + 1]; // think about why n + 1?????? consider rope with 0 length
     	M[0] = 1;
     	M[1] = 0;
     	for (int i = 2; i <= n; i++) {
