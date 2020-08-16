@@ -190,3 +190,17 @@ DFS vs BFS
 
 - 正确性dfs可以
 - space: need very large queen size, recursion tree grow exponentially.
+
+
+
+
+
+
+
+博弈类问题
+
+
+
+Flip game ii
+
+用recursion+ memoization的方法
