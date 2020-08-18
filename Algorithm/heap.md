@@ -84,8 +84,6 @@ Worst case: O(n^2)
 
 
 
-
-
 Java PriorityQueue
 
 - implement Queue interface
@@ -218,6 +216,78 @@ public class Heap {
     }
 	}
 }
+```
+
+
+
+Use PriorityQueue solve shortest path problem
+
+Q1:  
+
+input:
+
+a[]: int sorted array
+
+b[]: int sorted array
+
+output: k-th smallest or all top k small elements
+
+a: [2, 3, 5, 10, 15]
+
+b:[3, 6, 9, 12]
+
+```
+My idea is to construct a 2d matrix, matrix[i][j] represents the a[i] + b[j].
+According to a and b are sorted, so matrix[i][j] have two important properties
+1. each row are sorted
+2. each column are sorted
+
+e.g.
+
+[[5, 8, 11, 13],
+ [6, 9, 12, 15],
+ [8, 11, 14, 17],
+ [13, 16, 19, 22],
+ [18, 21, 24, 27]]
+ 
+ Actually we don't really need to construct the real 2d matrix, we can have this sence in our mind.
+ 
+ We can see for each element matrix[i][j], it must smaller than matrix[i+1][j] and matrix[i][j+1].
+ 
+ matrix[i][j]  <= matrix[i][j+1]
+ 
+ matrix[i][j]  <= matrix[i+1][j]
+ 
+ Solution: we can use a minheap to solve this problem. 
+ 
+ 
+ Solution 1:
+ Initial state: minHeap.offer(matrix[0][0])
+ 
+ For 1...k
+ 		we call minHeap.poll()
+ 		generate its two neighbours (right and bottom), add them to minheap
+ 
+ Time: O(k * log k)
+ space: O(k)
+ Drawback: we need an additional set to deduplicate, because each state can be generate more than 1 times
+ 
+ 
+ Solution 2:
+ Initial state: minHeap.offer(matrix[0][0..n] or matrix[0..m][0])
+ For 1...k
+ 		we call minHeap.poll()
+ 		generate its right or bottom neighbour, add to minheap
+ 
+ Time: O(min(m,n) + k * log(k + min(m, n))  heapify + add and delete k times in heap
+ Space: O(k + min(m, n)) use for heap
+ 
+ 
+ Conclusion:
+ 
+ If k <<<<<< min(m,n), prefer solution 1 
+ If k ~== min(m,n), prefer solution 2
+ If k >>>>> min(m,n) prefer solution 2
 ```
 
 
